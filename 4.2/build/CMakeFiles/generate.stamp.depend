@@ -1,0 +1,28 @@
+# CMake generation dependency list for this directory.
+C:/Program Files (x86)/Catch2/lib/cmake/Catch2/Catch2Config.cmake
+C:/Program Files (x86)/Catch2/lib/cmake/Catch2/Catch2ConfigVersion.cmake
+C:/Program Files (x86)/Catch2/lib/cmake/Catch2/Catch2Targets-debug.cmake
+C:/Program Files (x86)/Catch2/lib/cmake/Catch2/Catch2Targets.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeCInformation.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeCXXInformation.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeGenericSystem.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeRCInformation.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/Compiler/MSVC-C.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/Compiler/MSVC-CXX.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/Compiler/MSVC.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/Platform/Windows-MSVC-C.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/Platform/Windows-MSVC-CXX.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/Platform/Windows-MSVC.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/Platform/Windows.cmake
+C:/Program Files/CMake/share/cmake-3.26/Modules/Platform/WindowsPaths.cmake
+D:/Учёба/CPP/GIT-Repos/cppl-homeworks/4.2/CMakeLists.txt
+D:/Учёба/CPP/GIT-Repos/cppl-homeworks/4.2/build/CMakeFiles/3.26.0-rc4/CMakeCCompiler.cmake
+D:/Учёба/CPP/GIT-Repos/cppl-homeworks/4.2/build/CMakeFiles/3.26.0-rc4/CMakeCXXCompiler.cmake
+D:/Учёба/CPP/GIT-Repos/cppl-homeworks/4.2/build/CMakeFiles/3.26.0-rc4/CMakeRCCompiler.cmake
+D:/Учёба/CPP/GIT-Repos/cppl-homeworks/4.2/build/CMakeFiles/3.26.0-rc4/CMakeSystem.cmake

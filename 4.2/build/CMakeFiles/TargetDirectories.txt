@@ -1,7 +1,0 @@
-D:/Учёба/CPP/GIT-Repos/cppl-homeworks/4.2/build/CMakeFiles/HomeWork-4.2.dir
-D:/Учёба/CPP/GIT-Repos/cppl-homeworks/4.2/build/CMakeFiles/HomeWork-4.2_test.dir
-D:/Учёба/CPP/GIT-Repos/cppl-homeworks/4.2/build/CMakeFiles/ALL_BUILD.dir
-D:/Учёба/CPP/GIT-Repos/cppl-homeworks/4.2/build/CMakeFiles/ZERO_CHECK.dir
-D:/Учёба/CPP/GIT-Repos/cppl-homeworks/4.2/build/Catch2-build/CMakeFiles/ALL_BUILD.dir
-D:/Учёба/CPP/GIT-Repos/cppl-homeworks/4.2/build/Catch2-build/src/CMakeFiles/Catch2.dir
-D:/Учёба/CPP/GIT-Repos/cppl-homeworks/4.2/build/Catch2-build/src/CMakeFiles/Catch2WithMain.dir

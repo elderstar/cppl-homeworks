@@ -44,7 +44,7 @@ public:
 private:
 	size_t actual_size_ = 1;
 	size_t logical_size_ = 0;
-	double* arr_;
+	double* arr_ = nullptr;
 };
 
 void printArr(SmartArray& arr) {

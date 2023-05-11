@@ -1,20 +1,12 @@
 ﻿#include <iostream>
 #include <string>
 
-struct SmartLinkCounter {
-	size_t smart_link_counter = 0;
-};
-
 class SmartArray {
 public:
 
 	SmartArray(size_t size) {
-		if (size > actual_size_)
-		{
 			actual_size_ = size;
-			delete[] arr_;
 			arr_ = new double[actual_size_]();
-		}
 	}
 
 	~SmartArray() {
@@ -39,15 +31,46 @@ public:
 		arr_[logical_size_++] = new_value;
 	}
 
-	double getElement(int index) {
+	double getElement(int index) const {
 		if (index >= logical_size_ || index < 0) {
 			throw std::invalid_argument("\nerror: " + std::to_string(index) + " is wrong index. Valid index in range [0," + std::to_string(logical_size_ - 1) + "]");
 		}
 		return arr_[index];
 	}
 
-	const size_t getSize() {
+	size_t getSize() const {
 		return logical_size_;
+	}
+
+	size_t getActualSize() const {
+		return actual_size_;
+	};
+
+	size_t getCounter () const {
+		return smart_link_counter;
+	};
+
+	SmartArray(const SmartArray& rhl) {
+
+		if (this != &rhl)
+		{
+			size_t r_size = rhl.getSize();
+
+			if (r_size > 0) {
+				arr_ = new double[r_size]();
+				for (int i = 0; i < r_size; ++i) {
+
+					arr_[i] = rhl.getElement(i);
+				}
+			}
+			else {
+				arr_ = new double[actual_size_]();
+			}
+			
+			actual_size_ = rhl.getActualSize();
+			logical_size_ = rhl.getSize();
+			smart_link_counter = rhl.getCounter();
+		}
 	}
 
 	SmartArray& operator= (SmartArray& rhl) {
@@ -58,7 +81,6 @@ public:
 			new (this) SmartArray(rhl);
 			std::cout << "\narr copied";
 			++smart_link_counter;
-
 		}
 		return *this;
 	}
@@ -66,7 +88,7 @@ public:
 private:
 	size_t actual_size_ = 1;
 	size_t logical_size_ = 0;
-	double* arr_ = new double[actual_size_]();
+	double* arr_ = nullptr;
 	size_t smart_link_counter = 0;
 };
 
@@ -91,11 +113,18 @@ int main()
 		new_array.addElement(44);
 		new_array.addElement(34);
 		printArr(arr);
+
 		std::cout << std::endl;
 		printArr(new_array);
+
 		arr = new_array;
 		std::cout << std::endl;
+
 		printArr(arr);
+		std::cout << std::endl;
+
+		SmartArray arr1(3);
+		SmartArray arr2(arr1);
 	}
 	catch (const std::exception& ex) {
 		std::cout << ex.what() << std::endl;

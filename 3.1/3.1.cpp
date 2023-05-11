@@ -3,19 +3,19 @@
 
 class SmartArray {
 public:
+
 	SmartArray(size_t size) {
-		if (size > actual_size_)
-		{
-			actual_size_ = size;
-			delete[] arr_;
-			arr_ = new double[actual_size_]();
-		}
+		actual_size_ = size;
+		arr_ = new double[actual_size_]();
 	}
 
 	~SmartArray() {
 		delete[] arr_;
 		arr_ = nullptr;
 	}
+
+	SmartArray(const SmartArray&) = delete;
+	SmartArray& operator=(const SmartArray&) = delete;
 
 	void addElement(double new_value) {
 		if (logical_size_ >= actual_size_) {
@@ -44,7 +44,7 @@ public:
 private:
 	size_t actual_size_ = 1;
 	size_t logical_size_ = 0;
-	double* arr_ = new double[actual_size_]();
+	double* arr_;
 };
 
 void printArr(SmartArray& arr) {
@@ -58,15 +58,17 @@ void printArr(SmartArray& arr) {
 
 int main()
 {
+
 	try {
 		SmartArray arr(5);
+
 		arr.addElement(1);
-		arr.addElement(4);
-		arr.addElement(155);
-		arr.addElement(14);
-		arr.addElement(15);
+		arr.addElement(3);
+		arr.addElement(5);
+		arr.addElement(7);
+		arr.addElement(9);
 		printArr(arr);
-		std::cout << arr.getElement(5) << std::endl;
+		std::cout << arr.getElement(0) << std::endl;
 	}
 	catch (const std::exception& ex) {
 		std::cout << ex.what() << std::endl;

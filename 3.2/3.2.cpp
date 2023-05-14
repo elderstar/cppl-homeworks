@@ -10,12 +10,10 @@ public:
 	}
 
 	~SmartArray() {
-		if (smart_link_counter == 0) {
 			std::cout << "\nMem free of arr with " << arr_[0] << " first el";
 			
 			delete[] arr_;
 			arr_ = nullptr;
-		}
 	}
 
 	void addElement(double new_value) {
@@ -46,10 +44,6 @@ public:
 		return actual_size_;
 	};
 
-	size_t getCounter () const {
-		return smart_link_counter;
-	};
-
 	SmartArray(const SmartArray& rhl) {
 
 		if (this != &rhl)
@@ -69,18 +63,18 @@ public:
 			
 			actual_size_ = rhl.getActualSize();
 			logical_size_ = rhl.getSize();
-			smart_link_counter = rhl.getCounter();
 		}
 	}
 
-	SmartArray& operator= (SmartArray& rhl) {
+	SmartArray& operator= (const SmartArray& rhl) {
 		
-		if (this != &rhl)
-		{
-			this->~SmartArray();
+		if (this != &rhl){
 			new (this) SmartArray(rhl);
+
 			std::cout << "\narr copied";
-			++smart_link_counter;
+		}
+		else {
+			std::cout << "присвоение самому себе";
 		}
 		return *this;
 	}
@@ -89,7 +83,6 @@ private:
 	size_t actual_size_ = 1;
 	size_t logical_size_ = 0;
 	double* arr_ = nullptr;
-	size_t smart_link_counter = 0;
 };
 
 void printArr(SmartArray& arr) {
@@ -103,6 +96,7 @@ void printArr(SmartArray& arr) {
 
 int main()
 {
+	setlocale(LC_ALL , "Rus");
 	try {
 		SmartArray arr(5);
 		arr.addElement(1);
@@ -125,6 +119,12 @@ int main()
 
 		SmartArray arr1(3);
 		SmartArray arr2(arr1);
+		SmartArray x1(5);
+		x1.addElement(1);
+
+		SmartArray x2(5);
+		x1 = x1;
+		x2 = x1;
 	}
 	catch (const std::exception& ex) {
 		std::cout << ex.what() << std::endl;

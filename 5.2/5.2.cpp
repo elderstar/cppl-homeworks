@@ -19,6 +19,53 @@ public:
         delete[] arr;
     };
 
+    Table(const Table& r_val) {
+
+        for (int i = 0; i < rows_; ++i) {
+            delete[] arr[i];
+        }
+        delete[] arr;
+
+        rows_ = r_val.getRows();
+        cols_ = r_val.getCols();
+
+        arr = new T * [rows_];
+        for (int i = 0; i < rows_; ++i) {
+            arr[i] = new T[cols_]();
+        }
+
+        for (int i = 0; i < rows_; ++i) {
+            for (int j = 0; j < cols_; ++j) {
+                arr[i][j] = r_val[i][j];
+            }
+        }
+    }
+
+    Table& operator= (const Table& r_val) {
+        if (this != &r_val) {
+
+            for (int i = 0; i < rows_; ++i) {
+                delete[] arr[i];
+            }
+            delete[] arr;
+
+            rows_ = r_val.getRows();
+            cols_ = r_val.getCols();
+
+            arr = new T * [rows_];
+            for (int i = 0; i < rows_; ++i) {
+                arr[i] = new T[cols_]();
+            }
+
+            for (int i = 0; i < rows_; ++i) {
+                for (int j = 0; j < cols_; ++j) {
+                    arr[i][j] = r_val[i][j];
+                }
+            }
+        }
+        return *this;
+    }
+
     auto & operator[](size_t index) {
         if (index >= rows_ || index < 0) {
             throw(std::logic_error("Нарушение прав доступа при чтении/записи"));
@@ -38,6 +85,15 @@ public:
     const int Size() const {
         return rows_ * cols_;
     }
+
+    const int getRows() const {
+        return rows_;
+    }
+
+    const int getCols() const {
+        return cols_;
+    }
+
 private:
     int rows_ = 0;
     int cols_ = 0;
@@ -59,6 +115,17 @@ int main()
         test[1][2] = 12;
         std::cout << test[0][0] << "\n"; // выводит 4
         std::cout << test[1][2] << "\n"; // выводит 12
+
+        Table<int> t1(4, 5);
+        t1[3][3] = 54;
+        std::cout << t1[3][3] << "\n"; // выводит 54
+
+        Table<int> t2(2, 3);
+        t2 = t1;
+        std::cout << t2[3][3] << "\n"; // проверяем копию
+
+        Table<int> t3(t2);
+        std::cout << t3[3][3] << "\n"; // проверяем конструктор копирования
     }
     catch(const std::exception& e){
         std::cout << e.what();

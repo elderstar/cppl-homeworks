@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 bool isNumber(std::string str) {
     if (str[0] == ' ') {
@@ -17,13 +18,11 @@ bool isNumber(std::string str) {
 class Handler {
 public:
 
-    void operator()(std::vector<int> arr) {
+    void operator()(const int& el) {
         
-        for(int i:arr) {
-            if (i % 3 == 0) {
-                ++count_;
-                sum_ += i;
-            }
+        if (el % 3 == 0) {
+            ++count_;
+            sum_ += el;
         }
     }
 
@@ -40,7 +39,7 @@ private:
     int count_ = 0;
 };
 
-void print(std::vector<int> arr) {
+template<class T> void print(T arr) {
 
     size_t size = arr.size();
     for (int i = 0; i < size; ++i) {
@@ -89,7 +88,8 @@ int main()
         }
         arr.push_back(std::stod(sub_str));
     }
-    arr_handler(arr);
+    arr_handler = std::for_each(arr.begin(), arr.end(), arr_handler);
+
     std::cout << "[IN]: "; 
     print(arr);
     std::cout << "[OUT]: get_sum() = " << arr_handler.get_sum() << "\n";

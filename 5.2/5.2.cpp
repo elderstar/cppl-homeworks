@@ -21,11 +21,6 @@ public:
 
     Table(const Table& r_val) {
 
-        for (int i = 0; i < rows_; ++i) {
-            delete[] arr[i];
-        }
-        delete[] arr;
-
         rows_ = r_val.getRows();
         cols_ = r_val.getCols();
 
@@ -43,11 +38,6 @@ public:
 
     Table& operator= (const Table& r_val) {
         if (this != &r_val) {
-
-            for (int i = 0; i < rows_; ++i) {
-                delete[] arr[i];
-            }
-            delete[] arr;
 
             rows_ = r_val.getRows();
             cols_ = r_val.getCols();

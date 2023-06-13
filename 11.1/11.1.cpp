@@ -4,10 +4,9 @@
 
 template <class T>void move_vectors(std::vector<T>& two, std::vector<T>& one){
 
+    std::vector<T> tmp = std::move(two);
     two = std::move(one);
-    /*std::for_each(one.begin(), one.end(), [&two](T& n) {
-        two.push_back(std::move(n));
-        });*/
+    one = std::move(tmp);
 }
 
 void print(std::vector<std::string>& vec) {

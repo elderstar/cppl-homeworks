@@ -13,13 +13,13 @@ public:
         }
     };
 
-    big_integer(std::vector<int>& int_val) : long_ {int_val}{}
+    big_integer(const std::vector<int>& int_val) : long_ {int_val}{}
 
     big_integer(const big_integer& other) = delete;
 
 
     big_integer(big_integer&& rvalue) noexcept 
-        : long_{ std::move( rvalue.getValue() ) } {}
+        : long_{ std::move( rvalue.long_ ) } {}
 
     ~big_integer() {};
 
@@ -27,7 +27,11 @@ public:
 
     big_integer& operator= (big_integer&& rvalue) noexcept
     {
-        return *this = std::move(rvalue);
+        std::vector<int> tmp = std::move(long_);
+        long_ = std::move(rvalue.long_);
+        rvalue.long_ = std::move(tmp);
+
+        return *this;
     }
 
     big_integer operator+ (const big_integer& other) 
@@ -128,11 +132,22 @@ int main()
         auto number2 = big_integer("78524");
         auto result_plus = number1 + number2;
         auto result_mult = number1 * 18;
+        number1 = std::move(number2);
+
+        const std::vector<int> CONST_VALUES = { 1,2,3 };
+
+        big_integer num(CONST_VALUES);
+
+        for (const int& i : num.getValue()) {
+            std::cout << i;
+        }
+        std::cout << std::endl;
 
         for (const int& i : number1.getValue()) {
             std::cout << i;
         }
         std::cout << std::endl;
+
         for (const int& i : number2.getValue()) {
             std::cout << i;
         }

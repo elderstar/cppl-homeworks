@@ -85,6 +85,11 @@ public:
                 if (str.find('=') != std::string::npos)
                 {
                     pair.first = str.substr(0, str.find('='));
+                    int space_pos = str.find(' ');
+                        if (space_pos != std::string::npos)
+                        {
+                            pair.first = str.substr(0, space_pos);
+                        }
                     pair.second = parseString(str, str.find('='));
                     section_map[section_name][pair.first] = pair.second;
                 }

@@ -3,7 +3,6 @@
 #include <map>
 #include <string>
 #include <exception>
-#include <variant>
 
 class IniParser {
 public:
@@ -25,9 +24,13 @@ public:
             }
             printContent(section_map);
         }
+        file_.close();
     }
     ~IniParser() {
-        file_.close();
+        if (file_.is_open())
+        {
+            file_.close();
+        }
     }
 
     void printContent(std::map<std::string, std::map<std::string, std::string>>& section_map)
@@ -85,17 +88,40 @@ public:
                 if (str.find('=') != std::string::npos)
                 {
                     pair.first = str.substr(0, str.find('='));
-                    int space_pos = str.find(' ');
+                    size_t space_pos = pair.first.find(' ');
                         if (space_pos != std::string::npos)
                         {
-                            pair.first = str.substr(0, space_pos);
+                            pair.first = pair.first.substr(0, space_pos);
                         }
                     pair.second = parseString(str, str.find('='));
                     section_map[section_name][pair.first] = pair.second;
+                    pair = {};
                 }
             }
         }
         return section_map;
+    }
+
+    template<typename T>
+    T get_value(const std::string str) {
+        static_assert(get_value(), "not implemented conversion");
+    }
+    template<>
+    int get_value(const std::string str)
+    {
+        return std::stoi(str);
+    }
+
+    template<>
+    double get_value(const std::string str)
+    {
+        return std::stod(str);
+    }
+
+    template<>
+    std::string get_value(const std::string str)
+    {
+        return str;
     }
 
     template<class T> T getValue(std::string request_str)
@@ -110,24 +136,13 @@ public:
                 auto const& section = section_map[section_name];
                 if (section.find(param_name) != section.end())
                 {
-                    std::variant<std::string, int, double> var;
-                    if (std::is_same<int, T>::value)
-                    {
-                        var = std::stoi(section.find(param_name)->second);
-                    }
-                    else if (std::is_same<double, T>::value) {
-                        var = std::stod(section.find(param_name)->second);
-                    }
-                    else {
-                        var = section.find(param_name)->second;
-                    }
-                    return std::get<T>(var);
+                    return get_value<T>(section.find(param_name)->second);
                 }
                 else {
                     
                     std::cout << "\nSuch parametr [" + param_name + "] in section [" + section_name + "] not found.\n";
                     std::cout << "Did you mind one of these one?: ";
-                   
+                    
                     for (std::map<std::string, std::string>::const_iterator it = section.begin(); it != section.end(); ++it)
                     {
                         std::cout << it->first;
@@ -162,8 +177,10 @@ int main()
         std::cout << value  << "\n";
         auto value1 = parser.getValue<double>("Section1.var1");
         std::cout << value1 << "\n";
-        auto value2 = parser.getValue<std::string>("Section2.var22");
+        auto value2 = parser.getValue<std::string>("Section1.var2");
         std::cout << value2 << "\n";
+        auto value3 = parser.getValue<std::string>("Section2.var22");
+        std::cout << value3 << "\n";
     }
     catch (const std::exception& e)
     {
